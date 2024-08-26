@@ -44,12 +44,12 @@ body {
 .swiper-slide {
   position: relative;
   background: #fff;
-  height: 500px;
 
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   padding-left: 20px;
+  border-radius: 8px;
 }
 
 .swiper-slide img {
@@ -60,6 +60,7 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 1;
+  border-radius: 8px;
 }
 
 .swiper-slide .title,
@@ -88,3 +89,16 @@ body {
   font-size: 14px;
   line-height: 1.3;
 }
+
+.height-carousel {
+  height: 55vh;
+}
+
+.swiper-slide-horizontal img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }

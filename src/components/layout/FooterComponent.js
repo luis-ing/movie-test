@@ -1,15 +1,19 @@
-import React from 'react'
+import React from "react";
+import { useAuth } from "../../contexts/authContext";
+
 
 const FooterComponent = () => {
+    const { dataSession } = useAuth()
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-            <div className="sm:mx-auto mt-10 sm:w-full sm:max-w-sm pb-6">
-                <img
-                    alt="Contpaqi"
-                    src="./Logo-pelis.png"
-                    className="mx-auto h-14 w-auto"
-                />
-            </div>
+            {dataSession &&
+                <div className="sm:mx-auto mt-10 sm:w-full sm:max-w-sm pb-6">
+                    <img
+                        alt="Contpaqi"
+                        src="./Logo-pelis.png"
+                        className="mx-auto h-14 w-auto"
+                    />
+                </div>}
             <div className="sm:mx-auto sm:w-full md:max-w-md pb-6" style={{ fontSize: "15px" }}>
                 El servicio Contpaqi+ es comercializado por Contpaqi (MEXICO), 1917, Sin Nombre de Col 34, Av. José Alvarado, Jardín Español, Monterrey, N.L.
             </div>

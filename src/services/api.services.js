@@ -42,8 +42,23 @@ const getTrendingMovies = () => {
         .catch(err => console.error('error:' + err));
 }
 
+const getDetailMovies = (id) => {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${API_KEY_AUTH}`
+        }
+    };
+    return fetch(`${API_URL}/3/movie/${id}?language=en-US`, options)
+        .then(res => res.json())
+        .then(json => json)
+        .catch(err => console.error('error:' + err));
+}
+
 export {
     getSearch,
     getTrendingAll,
     getTrendingMovies,
+    getDetailMovies,
 }

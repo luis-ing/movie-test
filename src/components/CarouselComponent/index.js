@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -11,9 +12,9 @@ const CarouselComponent = ({ data }) => {
     return (
         <>
             <Swiper
-                spaceBetween={30}
+                spaceBetween={20}
                 centeredSlides={true}
-                slidesPerView={1.15}
+                slidesPerView={1.08}
                 grabCursor={true}
                 autoplay={{
                     delay: 5500,
@@ -27,16 +28,18 @@ const CarouselComponent = ({ data }) => {
                 className="mySwiper"
             >
                 {data?.map((item) => (
-                    <SwiperSlide>
-                        <img src={HOSTNAME_IMG1280 + item.backdrop_path} alt={item.title} loading="lazy" />
-                        <div className="title" data-swiper-parallax="-300">
-                            {item.title}
-                        </div>
-                        <div className="text" data-swiper-parallax="-100">
-                            <p>
-                                {item.overview}
-                            </p>
-                        </div>
+                    <SwiperSlide key={item.id}>
+                        <Link to={`/detail/${item.id}`}>
+                            <img src={HOSTNAME_IMG1280 + item.backdrop_path} alt={item.title} loading="lazy" />
+                            <div className="title" data-swiper-parallax="-300">
+                                {item.title}
+                            </div>
+                            <div className="text" data-swiper-parallax="-100">
+                                <p>
+                                    {item.overview}
+                                </p>
+                            </div>
+                        </Link>
                     </SwiperSlide>
                 ))}
             </Swiper>

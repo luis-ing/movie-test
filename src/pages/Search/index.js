@@ -59,7 +59,9 @@ const Search = () => {
                 />
             </div>
             {wordToSearch.length === 0 &&
-                <h1 class="m-8 text-3xl font-bold tracking-tight sm:text-5xl" style={{ width: "100%" }}>Popular</h1>
+                <div className="flex min-h-full flex-1">
+                    <h1 class="m-8 text-3xl font-bold tracking-tight sm:text-5xl" style={{ width: "100%" }}>Popular</h1>
+                </div>
             }
             <div
                 style={{
@@ -69,14 +71,14 @@ const Search = () => {
                     padding: "20px 40px"
                 }}
             >
-                {wordToSearch.length > 0 ?
+                {moviesToRender.length > 0 ?
                     movies?.results?.map((movie, index) => (
                         <MovieCard
                             key={index}
                             image={movie.poster_path}
                             title={movie.title}
                             year={movie.release_date}
-                            genre={movie.genre}
+                            genre={movie.media_type}
                             id={movie.id}
                         />
                     )) :
@@ -86,7 +88,7 @@ const Search = () => {
                             image={movie.poster_path}
                             title={movie.title}
                             year={movie.release_date}
-                            genre={movie.genre}
+                            genre={movie.media_type}
                             id={movie.id}
                         />
                     ))

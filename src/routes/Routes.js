@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home, Search, Movies, Login } from "../pages";
+import { Home, Search, Movies, Login, Detail } from "../pages";
 import { FooterComponent, HeaderComponent } from "../components";
 import ProtectedRoute from "./ProtectedRoute";
 import OpenedRoute from "./OpenedRoute";
@@ -54,7 +54,7 @@ const AppRoutes = () => {
                     path="/detail/:id"
                     element={
                         <ProtectedRoute>
-                            <Movies />
+                            <Detail />
                         </ProtectedRoute>
                     }
                 />

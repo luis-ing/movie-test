@@ -1,23 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { CarouselComponent } from '../../components';
-import { getTrendingMovies } from '../../services/api.services';
+import React, { useEffect, useState, useMemo } from 'react';
+import { CarouselBlockComponent, CarouselComponent } from '../../components';
+import { getTrendingAll } from '../../services/api.services';
 
 const Home = () => {
     const [trendringMovies, setTrendringMovies] = useState({});
 
     const getTrendingMoviesServices = async () => {
-        const response = await getTrendingMovies();
+        const response = await getTrendingAll();
         setTrendringMovies(response);
     }
 
     useEffect(() => {
         getTrendingMoviesServices();
-    }, [])
+    }, []);
+
+    const moviesToRenderTrending = useMemo(() => {
+        return trendringMovies || [];
+    }, [trendringMovies]);
 
     return (
         <div>
-            <div style={{ height: "55vh" }}>
-                <CarouselComponent data={trendringMovies.results} />
+            <div className="height-carousel">
+                <CarouselComponent data={moviesToRenderTrending.results} />
+            </div>
+            <div style={{ minHeight: "20vh", padding: "40px" }}>
+                <CarouselBlockComponent data={moviesToRenderTrending.results} />
             </div>
         </div>
     )
