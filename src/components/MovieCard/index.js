@@ -6,7 +6,7 @@ import { HOSTNAME_IMG500 } from "../../services/api.credentials";
 const MovieCard = ({ image, title, year, genre, id }) => {
 
     return (
-        <Link className="movie-card" to={`/detail/${id}`}>
+        <Link className="movie-card" to={`/detail/${id}/${genre}`}>
             <img src={HOSTNAME_IMG500 + image} alt={title} className="movie-image" loading="lazy" />
             <div className="movie-info">
                 <h3 className="movie-title">{title}</h3>

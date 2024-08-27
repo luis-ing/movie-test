@@ -9,6 +9,7 @@ const Search = () => {
 
     const getDataToSearch = async (data) => {
         const response = await getSearch(data);
+        console.log("seacrh ", response);
         setMovies(response);
     }
 
@@ -46,6 +47,7 @@ const Search = () => {
                     onChange={(e) => setWordToSearch(e.target.value)}
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="Buscar película, serie de TV o persona"
+                    autoComplete='off'
                     style={{
                         height: "100px",
                         width: "100%",
@@ -63,6 +65,11 @@ const Search = () => {
                     <h1 class="m-8 text-3xl font-bold tracking-tight sm:text-5xl" style={{ width: "100%" }}>Popular</h1>
                 </div>
             }
+            {moviesToRender.length > 0 &&
+                <div className='flex min-h-full flex-1'>
+                    <button className='bg-white text-black'>Siguiente</button>
+                </div>
+            }
             <div
                 style={{
                     display: "grid",
@@ -75,8 +82,8 @@ const Search = () => {
                     movies?.results?.map((movie, index) => (
                         <MovieCard
                             key={index}
-                            image={movie.poster_path}
-                            title={movie.title}
+                            image={movie.poster_path ? movie.poster_path : movie.profile_path}
+                            title={movie.title ? movie.title : movie.original_name}
                             year={movie.release_date}
                             genre={movie.media_type}
                             id={movie.id}
@@ -85,8 +92,8 @@ const Search = () => {
                     moviesToRender?.results?.map((movie, index) => (
                         <MovieCard
                             key={index}
-                            image={movie.poster_path}
-                            title={movie.title}
+                            image={movie.poster_path ? movie.poster_path : movie.profile_path}
+                            title={movie.title ? movie.title : movie.original_name}
                             year={movie.release_date}
                             genre={movie.media_type}
                             id={movie.id}

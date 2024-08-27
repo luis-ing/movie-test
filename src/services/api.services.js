@@ -42,7 +42,7 @@ const getTrendingMovies = () => {
         .catch(err => console.error('error:' + err));
 }
 
-const getDetailMovies = (id) => {
+const getDetailMovies = (id, type) => {
     const options = {
         method: 'GET',
         headers: {
@@ -50,7 +50,7 @@ const getDetailMovies = (id) => {
             Authorization: `Bearer ${API_KEY_AUTH}`
         }
     };
-    return fetch(`${API_URL}/3/movie/${id}?language=en-US`, options)
+    return fetch(`${API_URL}/3/${type}/${id}?language=en-US`, options)
         .then(res => res.json())
         .then(json => json)
         .catch(err => console.error('error:' + err));

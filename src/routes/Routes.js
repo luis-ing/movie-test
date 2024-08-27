@@ -51,7 +51,7 @@ const AppRoutes = () => {
                     }
                 />
                 <Route
-                    path="/detail/:id"
+                    path="/detail/:id/:type"
                     element={
                         <ProtectedRoute>
                             <Detail />
