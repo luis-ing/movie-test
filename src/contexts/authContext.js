@@ -17,21 +17,31 @@ export function AuthProvider({ children }) {
         return sessionData ? JSON.parse(sessionData) : null;
     });
 
-    const register = async ({ email, password }) => {
+    const register = async (email, password) => {
         try {
             const response = await createUserWithEmailAndPassword(auth, email, password);
-            console.log("response register ", response);
+            const user = response.user;
+            return { error: false, message: "Usuario registrado correctamente", user: user };
         } catch (error) {
-            console.log("Error al registrar ", error);
+            console.log("auiiii ", error)
+            if (error.message == "Firebase: Password should be at least 6 characters (auth/weak-password).") {
+                return { error: true, message: "La contraseña debe tener al menos 6 caracteres." }
+            } else if (error.message == "Firebase: Error (auth/email-already-in-use).") {
+                return { error: true, message: "El correo que intenta registrar, ya se encuentra en uso." }
+            } else {
+
+                return { error: true, message: error.message }
+            }
         }
     }
 
-    const login = async ({ email, password }) => {
+    const login = async (email, password) => {
         try {
             const response = await signInWithEmailAndPassword(auth, email, password);
-            console.log("response login ", response);
+            localStorage.setItem("authSession", JSON.stringify(response));
+            setDataSession(response);
         } catch (error) {
-            console.log("Error al login ", error);
+            return { error: "Credenciales invalidas o usuario no registrado." }
         }
     }
 

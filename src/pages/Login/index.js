@@ -4,15 +4,20 @@ import { useAuth } from "../../contexts/authContext";
 import { InputComponent, TabComponent, TabLayoutComponent } from "../../components";
 
 const Login = () => {
-    const auth = useAuth();
+    const { login, register, loginWithGoogle } = useAuth();
     const [selectedTab, setSelectedTab] = useState(0);
     const [dataLogin, setDataLogin] = useState({
         email: "",
-        pass: ""
+        pass: "",
+        error: false,
+        message: ""
     });
     const [dataRegister, setDataRegister] = useState({
         email: "",
-        pass: ""
+        pass: "",
+        error: false,
+        message: "",
+        succes: false
     });
 
     const onChangeValue = (e) => {
@@ -25,20 +30,30 @@ const Login = () => {
         setDataRegister((e) => ({ ...e, [name]: value }))
     }
 
-    const LoginFunction = (e) => {
+    const LoginFunction = async (e) => {
         e.preventDefault();
-        auth.login(dataLogin.email, dataLogin.pass);
+        setDataLogin((e) => ({ ...e, error: false, message: "" }))
+        const response = await login(dataLogin.email, dataLogin.pass);
+        if (response?.error) {
+            setDataLogin((e) => ({ ...e, error: true, message: response.error }))
+        }
     }
 
     const LoginWithGoogle = async () => {
-        const response = await auth.loginWithGoogle();
+        const response = await loginWithGoogle();
         console.log("response ", response);
     }
 
-    const RegisterFunction = (e) => {
+    const RegisterFunction = async (e) => {
         e.preventDefault();
-        console.log("register ", dataRegister.email, dataRegister.pass);
-        auth.register(dataRegister.email, dataRegister.pass);
+        setDataRegister((e) => ({ ...e, error: false, succes: false, message: "" }))
+        const response = await register(dataRegister.email, dataRegister.pass);
+        console.log("Register ", response);
+        if (response.error) {
+            setDataRegister((e) => ({ ...e, error: true, succes: false, message: response.message }));
+            return
+        }
+        setDataRegister((e) => ({ ...e, error: false, succes: true, message: "Usuario registrado correctamente" }))
     }
 
     return (
@@ -109,6 +124,12 @@ const Login = () => {
                                 >
                                     Iniciar con Google
                                 </button>
+                                {dataLogin.error &&
+                                    <div>
+                                        <p class="mt-6 text-base leading-7 text-red-600">
+                                            {dataLogin.message}
+                                        </p>
+                                    </div>}
                             </form>
                             :
                             <form className="space-y-6" onSubmit={RegisterFunction}>
@@ -141,6 +162,18 @@ const Login = () => {
                                 >
                                     Registrarse
                                 </button>
+                                {dataRegister.error &&
+                                    <div>
+                                        <p class="mt-6 text-base leading-7 text-red-600">
+                                            {dataRegister.message}
+                                        </p>
+                                    </div>}
+                                {dataRegister.succes &&
+                                    <div>
+                                        <p class="mt-6 text-base leading-7 text-green-600">
+                                            {dataRegister.message}
+                                        </p>
+                                    </div>}
 
                             </form>
                         }
