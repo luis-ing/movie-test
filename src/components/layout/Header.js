@@ -56,7 +56,7 @@ const HeaderComponent = () => {
                         </Link>
                         <Popover className="relative">
                             <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-0 rounded-full">
-                                <img className="inline-block h-7 w-7 rounded-full ring-2 ring-white" src={dataSession.user.photoURL} alt="" />
+                                <img className="inline-block h-7 w-7 rounded-full ring-2 ring-white" src={dataSession.user.photoURL ? dataSession.user.photoURL : "./photoPerfil.jpg"} alt="" />
                             </PopoverButton>
 
                             <PopoverPanel
