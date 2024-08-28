@@ -32,7 +32,7 @@ const CarouselComponent = ({ data }) => {
                         <Link to={`/detail/${item.id}/${item.media_type}`}>
                             <img src={HOSTNAME_IMG1280 + item.backdrop_path} alt={item.title} loading="lazy" />
                             <div className="title" data-swiper-parallax="-300">
-                                {item.title}
+                                {item.title ? item.title : item.original_name}
                             </div>
                             <div className="text" data-swiper-parallax="-100">
                                 <p>

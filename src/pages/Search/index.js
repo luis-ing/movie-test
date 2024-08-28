@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { getSearch, getTrendingAll } from '../../services/api.services';
 import MovieCard from '../../components/MovieCard';
+import { Link } from 'react-router-dom';
 
 const Search = () => {
     const [wordToSearch, setWordToSearch] = useState("");
@@ -65,21 +66,10 @@ const Search = () => {
                     <h1 class="m-8 text-3xl font-bold tracking-tight sm:text-5xl" style={{ width: "100%" }}>Popular</h1>
                 </div>
             }
-            {moviesToRender.length > 0 &&
-                <div className='flex min-h-full flex-1'>
-                    <button className='bg-white text-black'>Siguiente</button>
-                </div>
-            }
-            <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-                    gap: "16px",
-                    padding: "20px 40px"
-                }}
-            >
+
+            <div className='grid-template-columns'>
                 {moviesToRender.length > 0 ?
-                    movies?.results?.map((movie, index) => (
+                    moviesToRender?.results?.map((movie, index) => (
                         <MovieCard
                             key={index}
                             image={movie.poster_path ? movie.poster_path : movie.profile_path}
@@ -101,7 +91,11 @@ const Search = () => {
                     ))
                 }
             </div>
-        </div >
+            {wordToSearch?.length > 0 && movies?.results?.length === 0 &&
+                <div className='flex min-h-full flex-1'>
+                    <h2 class="m-8 text-3xl font-bold tracking-tight sm:text-5xl text-gray-400" style={{ width: "100%" }}>No se encontraron resultados de busqueda para "{wordToSearch}"</h2>
+                </div>}
+        </div>
     )
 }
 

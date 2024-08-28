@@ -5,6 +5,7 @@
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease;
+    max-width: 260px;
 }
 
 .movie-card:hover {

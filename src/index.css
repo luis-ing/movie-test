@@ -102,3 +102,22 @@ body {
     object-fit: cover;
     z-index: 1;
   }
+
+.grid-template-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  padding: 20px 40px;
+}
+
+@media (max-width: 590px) {
+    .grid-template-columns {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    }
+}
+
+@media (max-width: 820px) {
+  .swiper-slide-horizontal {
+    width: 160px !important;
+  }
+}
